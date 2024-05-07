@@ -42,7 +42,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public boolean addOne(EntryItem item){
 
+        SQLiteDatabase db  = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ENTRY_NAME, item.getName());
+        cv.put(COLUMN_ENTRY_LASTNAME, item.getLastName());
+        cv.put(COLUMN_ENTRY_AGE, item.getAge());
+
+        long insert = db.insert(ENTRY_TABLE, null, cv);
+        if( insert == -1){
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public List<EntryItem> getAll(){
+        List<EntryItem> returnList = new ArrayList<>();
+
+        String query =  "SELECT * FROM " + ENTRY_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+
+            do {
+                int ID = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String lastName = cursor.getString(2);
+                int age = cursor.getInt(3);
+
+                EntryItem newEntry = new EntryItem(ID, name, lastName, age);
+                returnList.add(newEntry);
+            } while(cursor.moveToNext());
+
+            //Log.i();
+        } else {
+
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 
 
 }
