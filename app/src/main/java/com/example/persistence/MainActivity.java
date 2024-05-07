@@ -55,9 +55,13 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-                boolean succes = databaseHelper.addOne(entryItem);
+                boolean success = databaseHelper.addOne(entryItem);
 
-                Log.i(":)", "Success " + succes);
+                editName.setText("");
+                editLastName.setText("");
+                editAge.setText("");
+
+                Log.i(":)", "Success " + success);
             }
         });
 
