@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         editAge = findViewById(R.id.editAge);
         textBox = findViewById(R.id.textBox);
 
+        textBox.setMovementMethod(new ScrollingMovementMethod());
 
         write.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (Exception e){
                     Log.i(":)", "Error creating entry");
-                    entryItem = new EntryItem(-1 , "error", "Error", 0);
+                    entryItem = new EntryItem(-1 , "Error", "Errorsson", 999);
                 }
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
